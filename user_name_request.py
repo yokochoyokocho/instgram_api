@@ -5,6 +5,7 @@ import os
 from pprint import pprint
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 
@@ -29,6 +30,7 @@ def basic_info():
     return config
 
 
+# APIリクエスト用の関数
 def InstaApiCall(url, params, request_type):
     # リクエスト
     if request_type == "POST":
@@ -50,20 +52,35 @@ def InstaApiCall(url, params, request_type):
     return res
 
 
-def debugAT(params):
+def get_user_media_stats(params, ig_user_name):
+    """
+    ***********************************************************************************
+    【APIのエンドポイント】
+    "https://graph.facebook.com/v14.0/17841405309211844?fields=business_discovery.username('ig_username'){followers_count,media_count}&access_token={access-token}"
+    ***********************************************************************************
+    """
+
     # エンドポイントに送付するパラメータ
     Params = dict()
-    Params["input_token"] = params["access_token"]
+    Params["user_id"] = params["instagram_account_id"]
     Params["access_token"] = params["access_token"]
+    Params["fields"] = (
+        "business_discovery.username("
+        + ig_username
+        + "){followers_count,media_count,media{comments_count,like_count}}"
+    )
     # エンドポイントURL
-    url = params["graph_domain"] + "/debug_token"
-    # 戻り値
+    url = params["endpoint_base"] + Params["user_id"]
+    # 出力
     return InstaApiCall(url, Params, "GET")
 
 
-# リクエスト
-params = basic_info()  # リクエストパラメータ
-response = debugAT(params)  # レスポンス
+# 【要修正】インスタグラムユーザー名を指定！
+ig_username = "hiraizumi_contents_trial"
 
-# レスポンス
+# リクエストパラメータ
+params = basic_info()  # リクエストパラメータ
+response = get_user_media_stats(params, ig_username)  # レスポンス
+
+# 出力
 pprint(response)

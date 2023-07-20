@@ -2,24 +2,25 @@ import time
 import requests
 import json
 import datetime
+import os
 from pprint import pprint
+from dotenv import load_dotenv
 
 
-# 別のファイルからほんとは呼び出したい
-# from secret import module_token
+load_dotenv()
+
+
 def basic_info():
     # 初期
     config = dict()
     # 【要修正】アクセストークン
-    config[
-        "access_token"
-    ] = "EABVRUXsUlVkBADaOW8VJQL7uoTU76vOYUDwFk1DRgBcw9WTWN7JMieRS9gSvtZCbli5MmTAvqFMT2Wsbc90biGqAEzGj3rpZCwYOJ8JGqsICN8T4P0Crk2Df2BRj8vNFIMpOju06UKPQJ2CjB5aV64n7xZBul1hNxKjCEafJpPTG7ZAdojxx"
+    config["access_token"] = os.environ["Access_token"]
     # 【要修正】アプリID
-    config["app_id"] = "6000384910071129"
+    config["app_id"] = os.environ["App_id"]
     # 【要修正】アプリシークレット
-    config["app_secret"] = "8f9da64ca76578e9c1d781038aac89a3"
+    config["app_secret"] = os.environ["App_secret"]
     # 【要修正】インスタグラムビジネスアカウントID
-    config["instagram_account_id"] = "17841460786704613"
+    config["instagram_account_id"] = os.environ["Instagram_account_id"]
     # 【要修正】グラフバージョン
     config["version"] = "v17.0"
     # 【修正不要】graphドメイン
@@ -28,9 +29,6 @@ def basic_info():
     config["endpoint_base"] = config["graph_domain"] + config["version"] + "/"
     # 出力
     return config
-
-
-# ここまで↑
 
 
 # APIリクエスト用の関数
