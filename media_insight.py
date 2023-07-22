@@ -84,7 +84,7 @@ def MediaInsights(params, media_id, media_type):
 
 
 # 【要修正】メディアID
-media_id = "XXXXX"
+media_id = "17897577401834088"
 # 【要修正】メディア種別（IMAGE or VIDEO or STORY or REEL）
 media_type = "IMAGE"
 
