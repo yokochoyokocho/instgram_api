@@ -97,11 +97,11 @@ try:
     response = getUserMedia(params, response["json_data"]["paging"]["next"])
     print("\n----------" + str(response["json_data"]["data"][0]["username"]) + "の投稿内容 ----------\n")
     for i, post in enumerate(response["json_data"]["data"]):
-        print("\n----------投稿内容(" + str(i + 1) + ")----------\n")
+        # print("\n----------投稿内容(" + str(i + 1) + ")----------\n")
         print("投稿日: " + post["timestamp"])
         print("投稿メディアID: " + post["id"])
-        print("メディア種別: " + post["media_type"])
-        print("投稿リンク: " + post["permalink"])
-        print("\n投稿文: " + post["caption"])
+        # print("メディア種別: " + post["media_type"])
+        # print("投稿リンク: " + post["permalink"])
+        # print("\n投稿文: " + post["caption"])
 except:
     pass
